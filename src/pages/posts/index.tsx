@@ -5,7 +5,7 @@ import Image from "next/image";
 import thumbImg from "../../../public/images/thumb.png";
 
 
-
+import { FiChevronLeft, FiChevronsLeft, FiChevronsRight, FiChevronRight} from "react-icons/fi";
 
 export default function Posts(){
     return(
@@ -38,7 +38,37 @@ export default function Posts(){
                             Mas chega de conversa e bora pro código junto comigo que o 
                             vídeo está show de bola!</p>
                     </Link>
+
+                        <div className={styles.buttonNavigate}>
+                            <div>
+                                <button>
+                                    <FiChevronsLeft size={25} color="#FFF" />
+                                </button>
+                                <button>
+                                    <FiChevronLeft size={25} color="#FFF" />
+                                </button>
+                            </div>
+
+
+                            <div>
+                                <button>
+                                    <FiChevronRight size={25} color="#FFF" />
+                                </button>
+                                <button>
+                                    <FiChevronsRight size={25} color="#FFF" />
+                                </button>
+                                
+                            </div>
+
+                        </div>
+
+
                 </div>
+
+
+
+
+
             </main>
         </>
     )

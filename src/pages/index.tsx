@@ -2,6 +2,9 @@ import Image from "next/image";
 import techsImage from "../../public/images/techs.svg"
 import Head from "next/head";
 import styles from "../styles/home.module.scss";
+import { GetStaticProps } from "next";
+import { getPrismicClient } from "../services/prismic";
+import Prismic from "@prismicio/client";
 
 export default function Home() {
   return (
@@ -67,3 +70,22 @@ export default function Home() {
   </main>
   </>
 )}
+
+
+
+export const getStaticProps: GetStaticProps = async () => {
+      const prismic = getPrismicClient();
+
+      const response = await prismic.query([
+        Prismic.Predicates.at('document.type', 'home')
+      ])
+
+      console.log(response.results[0].data)
+
+
+  return{
+    props: {
+
+    }
+  }
+}
