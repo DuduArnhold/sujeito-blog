@@ -5,8 +5,35 @@ import styles from "../styles/home.module.scss";
 import { GetStaticProps } from "next";
 import { getPrismicClient } from "../services/prismic";
 import Prismic from "@prismicio/client";
+import { RichText }  from "prismic-dom";
 
-export default function Home() {
+
+
+type Content = {
+  title: string,
+  subtitle: string,
+  linkAction: string[],
+  mobile_title: string,
+  mobile_content: string,
+  mobile_banner: string,
+  web_title: string,
+  web_content: string,
+  web_banner: string,
+}
+
+interface contentProps{
+  content: Content;
+}
+
+
+
+
+
+
+
+
+
+export default function Home({ content }: contentProps) {
   return (
   <>
   <Head>
@@ -21,7 +48,7 @@ export default function Home() {
         <h1>Levando você ao próximo nível!</h1>
           <span>Uma plataforma com cursos que vão do zero até o profissional na pratica, direto ao ponto aplicando o que usamos no mercado de trabalho. 👊</span>
       
-            <a>
+            <a href="www.youtube.com/sujeitoprogramador">
               <button>Começar Agora</button>
             </a>
 
@@ -82,10 +109,29 @@ export const getStaticProps: GetStaticProps = async () => {
 
       console.log(response.results[0].data)
 
+      const {
+        title, subtitle, link_action, 
+        mobile_title, mobile_content, mobile_banner,
+        web_title, web_content, web_banner
+      } = response.results[0].data;
+
+      const content = {
+        title: RichText.asText(title),
+        subtitle: RichText.asText(subtitle),
+        linkAction: link_action.url,
+        mobile_title: RichText.asText(mobile_title),
+        mobile_content: RichText.asText(mobile_content),
+        mobile_banner: mobile_banner.url,
+        web_title: RichText.asText(web_title),
+        web_content: RichText.asText(web_content),
+        web_banner: web_banner.url,
+      }
+
 
   return{
     props: {
-
-    }
+        content,
+    },
+    revalidate: 60 * 2// Gerado a cada 2 min
   }
 }
