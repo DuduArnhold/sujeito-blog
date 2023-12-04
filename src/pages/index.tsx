@@ -12,7 +12,7 @@ import { RichText }  from "prismic-dom";
 type Content = {
   title: string,
   subtitle: string,
-  linkAction: string[],
+  linkAction: string,
   mobile_title: string,
   mobile_content: string,
   mobile_banner: string,
@@ -45,10 +45,10 @@ export default function Home({ content }: contentProps) {
   <main className={styles.container}>
     <div className={styles.containerHeader}>
       <section className={styles.CtaText}>
-        <h1>Levando você ao próximo nível!</h1>
-          <span>Uma plataforma com cursos que vão do zero até o profissional na pratica, direto ao ponto aplicando o que usamos no mercado de trabalho. 👊</span>
+        <h1>{content.title}</h1>
+          <span>{content.subtitle}</span>
       
-            <a href="www.youtube.com/sujeitoprogramador">
+            <a href={content.linkAction}>
               <button>Começar Agora</button>
             </a>
 
@@ -64,11 +64,11 @@ export default function Home({ content }: contentProps) {
 
     <div className={styles.sectionContent}>
       <section>
-        <h2>Aprenda criar aplicativos para android e ios.</h2>
-        <span>Você vai descobrir o jeito mais moderno de desenvolver apps nativos para iOS e Android, construindo aplicativos do zero até aplicativos.</span>
+        <h2>{content.mobile_title}</h2>
+        <span>{content.mobile_content}</span>
       </section>
 
-      <img src="/images/financasApp.png" alt="Exemplo de App" />
+      <img src={content.mobile_banner} alt="Exemplo de App" />
     </div>
 
 
@@ -76,10 +76,10 @@ export default function Home({ content }: contentProps) {
       <hr className={styles.divisor}/>
 
       <div className={styles.sectionContent}>
-        <img src="/images/webDev.png" alt="Exemplo de App" />
+        <img src={content.web_banner} alt="Exemplo de App" />
         <section>
-          <h2>Aprenda criar sistemas web.</h2>
-          <span>Criar sistemas web, sites usando as tecnologias mais modernas e requisitadas pelo mercado.</span>
+          <h2>{content.web_title}</h2>
+          <span>{content.web_content}</span>
         </section>
       </div>
         <div className={styles.nextLevelContent}>
@@ -87,7 +87,7 @@ export default function Home({ content }: contentProps) {
           <h2>Mais de <span className={styles.alunos}>15 mil</span> já levaram sua carreira ao próximo nivel.</h2>
           <span className={styles.nextLevelSpan}>E você vai perder a chance de evoluir de uma vez por todas?</span>
 
-          <a><button>ACESSAR TURMA</button></a>
+          <a href={content.linkAction}><button>ACESSAR TURMA</button></a>
         </div>
 
 
